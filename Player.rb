@@ -1,5 +1,5 @@
 class Player
-  attr_reader :name, :score, :mark
+  attr_reader :name, :score
 
   def initialize(name, sign)
     @name = name
@@ -17,9 +17,3 @@ class Player
     marks[pos].nil? && (pos >= 0 && pos <= 8)
   end
 end
-
-marks = Array.new(9)
-
-p1 = Player.new("emil", "x")
-p2 = Player.new("tatyana", "o")
-
