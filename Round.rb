@@ -1,7 +1,10 @@
 class Round
-  def initialize(p1, p2)
-    @p1 = p1
-    @p2 = p2
+  def initialize
+    @marks = Array.new(9)
+  end
+  
+  def play(p1, p2)
+    
   end
 
 end
