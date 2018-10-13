@@ -1,4 +1,5 @@
 class Round
+  attr_reader :marks
   # All possible winning combinations of board positions
   @@win_combos = [
     [0, 3, 6],
@@ -20,10 +21,23 @@ class Round
   # input, with a stop condition if there is a winner
   def play(p1, p2)
     loop do
-      p1.get_input(@marks)
-      break if p1.won?(@marks, @@win_combos)
-      p2.get_input(@marks)
-      break if p2.won?(@marks, @@win_combos)
+      break unless next_move(p1)
+      break unless next_move(p2)
     end
+  end
+
+  private
+  def next_move(player)
+    player.get_input(self.marks)
+    if player.won?(self.marks, @@win_combos)
+      player.increase_score
+      win_message(player)
+      return false
+    end
+    return true
+  end
+
+  def win_message(player)
+    puts "#{player.name} has won the round."
   end
 end

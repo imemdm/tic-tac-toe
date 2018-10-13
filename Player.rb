@@ -1,5 +1,6 @@
 class Player
-  attr_reader :name, :score, :sign
+  attr_reader :name, :sign
+  attr_accessor :score
 
   def initialize(name, sign)
     @name = name
@@ -26,13 +27,6 @@ class Player
     end
   end
 
-  # Check if the player is allowed to mark the
-  # square in question
-  def valid_mark?(pos, marks)
-    pos = pos - 1
-    marks[pos].nil? && (pos >= 0 && pos <= 8)
-  end
-
   # Checks if a player has a winning combination of
   # marked positions by comparing all of the possible
   # combinations of his marks with the win combinations
@@ -43,6 +37,18 @@ class Player
     pos_combos.any? do |combo|
       win_combos.include?(combo)
     end
+  end
+
+  def increase_score
+    self.score += 1
+  end
+
+  private
+  # Check if the player is allowed to mark the
+  # square in question
+  def valid_mark?(pos, marks)
+    pos = pos - 1
+    marks[pos].nil? && (pos >= 0 && pos <= 8)
   end
 
   # Gets the board positions of player's marks
@@ -56,6 +62,6 @@ class Player
 
   # Prints a message for UX purposes
   def ask_for_input
-    print "#{self.name}, mark a position on the board (1-9) "
+    print "#{self.name}, mark a position on the board (1-9): "
   end
 end
