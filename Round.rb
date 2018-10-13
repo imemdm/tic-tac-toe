@@ -1,7 +1,7 @@
 require "./Board.rb"
 
 class Round
-  attr_reader :marks
+  attr_reader :marks, :p1, :p2
   # All possible winning combinations of board positions
   @@win_combos = [
     [0, 3, 6],
@@ -14,7 +14,9 @@ class Round
     [2, 4, 6]
   ]
 
-  def initialize
+  def initialize(p1, p2)
+    @p1 = p1
+    @p2 = p2
     @marks = Array.new(9)
     @board = Board.new
   end
@@ -22,10 +24,11 @@ class Round
   # Play a single round of Tic Tac Toe 
   # by asking each player successively for 
   # input, with a stop condition if there is a winner
-  def play(p1, p2)
+  def play
+    Board.draw
     loop do
-      break unless next_move(p1)
-      break unless next_move(p2)
+      break unless next_move(self.p1)
+      break unless next_move(self.p2)
     end
   end
 

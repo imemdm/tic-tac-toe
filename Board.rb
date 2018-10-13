@@ -1,4 +1,5 @@
 class Board
+  
   def draw(marks = [])
     pos = 0
     5.times do |row|
