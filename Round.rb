@@ -1,3 +1,5 @@
+require "./Board.rb"
+
 class Round
   attr_reader :marks
   # All possible winning combinations of board positions
@@ -14,6 +16,7 @@ class Round
 
   def initialize
     @marks = Array.new(9)
+    @board = Board.new
   end
   
   # Play a single round of Tic Tac Toe 
@@ -33,6 +36,7 @@ class Round
   # a boolean so the 'round' loop can be stopped when won. 
   def next_move(player)
     player.get_input(self.marks)
+    @board.draw(@marks)
     if player.won?(self.marks, @@win_combos)
       player.increase_score
       print_winner(player)
