@@ -27,17 +27,22 @@ class Round
   end
 
   private
+  # Sends a message to get player's input, 
+  # then checks with another message if the round 
+  # has been won with that particular mark. It returns 
+  # a boolean so the 'round' loop can be stopped when won. 
   def next_move(player)
     player.get_input(self.marks)
     if player.won?(self.marks, @@win_combos)
       player.increase_score
-      win_message(player)
+      print_winner(player)
       return false
     end
     return true
   end
 
-  def win_message(player)
+  # Shows who won the particular round in the console 
+  def print_winner(player)
     puts "#{player.name} has won the round."
   end
 end
