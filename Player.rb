@@ -1,5 +1,5 @@
 class Player
-  attr_reader :name, :score
+  attr_reader :name, :score, :sign
 
   def initialize(name, sign)
     @name = name
@@ -31,6 +31,27 @@ class Player
   def valid_mark?(pos, marks)
     pos = pos - 1
     marks[pos].nil? && (pos >= 0 && pos <= 8)
+  end
+
+  # Checks if a player has a winning combination of
+  # marked positions by comparing all of the possible
+  # combinations of his marks with the win combinations
+  def won?(marks, win_combos)
+    marked_positions = extract_mark_positions(marks)
+    pos_combos = marked_positions.combination(3).to_a
+
+    pos_combos.any? do |combo|
+      win_combos.include?(combo)
+    end
+  end
+
+  # Gets the board positions of player's marks
+  def extract_mark_positions(marks)
+    positions = []
+    marks.each_with_index do |m, id|
+      positions << id if self.sign == m
+    end
+    positions
   end
 
   # Prints a message for UX purposes
