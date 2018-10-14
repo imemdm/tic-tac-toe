@@ -19,7 +19,7 @@ class Game
   end
 
   private
-  # Settle the game by comparing players' scores
+  # Settles the game by comparing players' scores
   def settle
     if @player1.score > @player2.score
       @game_winner = @player1
@@ -35,7 +35,7 @@ class Game
     puts "#{@rounds} rounds will be played."
   end
 
-  # End the game by displaying the final result
+  # Ends the game by displaying the final result
   def ending_screen
     if @game_winner.nil?
       puts "DRAW!"
