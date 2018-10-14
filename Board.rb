@@ -1,7 +1,7 @@
 class Board
-  
-  def draw(marks = [])
+  def self.draw(marks = [])
     pos = 0
+    puts "\n" * 2
     5.times do |row|
       5.times do |col|
         if row % 2 == 0 && col % 2 == 0
@@ -15,5 +15,6 @@ class Board
       end
       puts "\n"
     end
+    puts "\n" * 2
   end
 end
