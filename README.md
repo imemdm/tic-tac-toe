@@ -1,6 +1,6 @@
 # Command line Tic Tac Toe implementation in Ruby with OOP
 
-### Features
+## Features
 
 - Players can choose a name and number of rounds to be played
 - Players can mark spaces on the board through numeric indexes
