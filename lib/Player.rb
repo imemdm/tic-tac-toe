@@ -9,35 +9,31 @@ class Player
     @positions = []
   end
 
-  # Records a mark in the internal data structure
-  def mark(pos:, opponent_positions:)
-    if valid_mark?(pos, opponent_positions)
-      positions << pos
-      true
-    else
-      false
-    end
-  end
-
-  # Continuously tries to mark a valid position
+  # Get input from the command line
   def get_input
-    loop do 
-      ask_for_input
-      pos = gets.chomp.to_i
-      break if mark(pos: pos, opponent_positions: positions) 
+    ask_for_input
+    convert_input(gets.chomp)
+  end
+
+  # Returns an integer if input is numeric, nil otherwise
+  def convert_input(input)
+    if numeric?(input)
+      input.to_i
+    else
+      nil
     end
   end
 
-  # Checks if a player has a winning combination of
-  # marked positions by comparing all of the possible
-  # combinations of his positions with the win combinations
-  def won?(positions, win_combos)
-    marked_positions = extract_mark_positions(positions)
-    pos_combos = marked_positions.combination(3).to_a
+  def add_position(position:)
+    positions << position
+  end
 
-    pos_combos.any? do |combo|
-      win_combos.include?(combo)
+  def won?(conditions:)
+    outcome = false
+    positions.sort!.combination(3).to_a.each do |combo|
+      outcome = conditions.include?(combo)
     end
+    outcome
   end
 
   def increase_score
@@ -45,22 +41,12 @@ class Player
   end
 
   private
-  # Check if the player is allowed to mark the
-  # square in question
-  def valid_mark?(pos, opponent_positions)
-    !opponent_positions.include?(pos) && (pos >= 0 && pos <= 8)
+
+  # A helper that checks if a given string represents an integer
+  def numeric?(str)
+    Integer(str) != nil rescue false
   end
 
-  # Gets the board positions of player's positions
-  def extract_mark_positions(positions)
-    positions = []
-    positions.each_with_index do |m, id|
-      positions << id if self.sign == m
-    end
-    positions
-  end
-
-  # Prints a message for UX purposes
   def ask_for_input
     print "#{self.name}, mark a position on the board (0-8): "
   end

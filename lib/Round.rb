@@ -1,16 +1,6 @@
 class Round
   attr_reader :marks, :p1, :p2
-  # All possible winning combinations of board positions
-  @@win_combos = [
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ]
+
 
   def initialize(p1, p2)
     @p1 = p1

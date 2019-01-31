@@ -1,6 +1,18 @@
 class Board
   attr_reader :marks
 
+  # All possible winning combinations of board positions
+  @@win_combos = [
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ]
+
   def initialize
     @marks = Array.new(9)
   end
@@ -11,6 +23,10 @@ class Board
 
   def valid_position?(position:)
     marks[position].nil? && position >= 0 && position <= 8
+  end
+
+  def win_conditions
+    @@win_combos
   end
 
   def draw
