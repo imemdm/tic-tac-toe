@@ -16,37 +16,18 @@ RSpec.describe Player do
     end
   end
 
-  describe "#add_position" do
-    it "adds the position to the players' positions" do
-      player = Player.new("Emil", "x")
-
-      player.add_position(position: 1)
-
-      expect(player.positions).to include(1)
-    end
-  end
-
   describe "#won?" do
     it "returns true if the player has won the round" do
-      board = Board.new
-
       player = Player.new("Emil", "x")
 
-      player.add_position(position: 0)
-      player.add_position(position: 1)
-      player.add_position(position: 2)
-
-      expect(player.won?(conditions: board.win_conditions)).to eq(true)
+      expect(player.won?(positions: [0, 1, 2], conditions: [[0, 1, 2]])).to eq(true)
     end
 
     it "returns false if the player hasn't won the round" do
-      board = Board.new
 
       player = Player.new("Emil", "x")
 
-      player.add_position(position: 0)
-
-      expect(player.won?(conditions: board.win_conditions)).to eq(false)
+      expect(player.won?(positions: [0], conditions: [[0, 1, 2]])).to eq(false)
     end
   end
 

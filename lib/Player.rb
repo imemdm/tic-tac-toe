@@ -1,12 +1,11 @@
 class Player
-  attr_reader :name, :positions
+  attr_reader :name
   attr_accessor :score, :sign
 
   def initialize(name, sign)
     @name = name
     @sign = sign
     @score = 0
-    @positions = []
   end
 
   # Get input from the command line
@@ -24,11 +23,7 @@ class Player
     end
   end
 
-  def add_position(position:)
-    positions << position
-  end
-
-  def won?(conditions:)
+  def won?(positions:, conditions:)
     outcome = false
     positions.sort!.combination(3).to_a.each do |combo|
       outcome = conditions.include?(combo)

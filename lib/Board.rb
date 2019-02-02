@@ -29,6 +29,16 @@ class Board
     @@win_combos
   end
 
+  def extract_player_positions(sign:)
+    marks.each_with_index
+          .select { |mark, pos| mark == sign }
+          .map { |p_mark, pos| pos }
+  end
+
+  def full?
+    !marks.include?(nil)
+  end
+
   def draw
     pos = 0
     puts "\n" * 2

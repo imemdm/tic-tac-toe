@@ -1,7 +1,7 @@
-require './Game.rb'
-require './Board.rb'
-require './Round.rb'
-require './Player.rb'
+require './lib/Game.rb'
+require './lib/Board.rb'
+require './lib/Round.rb'
+require './lib/Player.rb'
 
 print "Please select a name for Player 1: "
 player1 = gets.chomp

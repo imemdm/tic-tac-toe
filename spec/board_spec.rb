@@ -52,4 +52,39 @@ RSpec.describe Board do
       end
     end
   end
+
+  describe "#extract_player_positions" do
+    it "returns an empty array if no marks on the board" do
+      expect(board.extract_player_positions(sign: "x")).to eq([])
+      expect(board.extract_player_positions(sign: "o")).to eq([])
+    end
+
+    it "returns the correct positions for the given sign" do
+      board.add_mark(mark: "x", position: 0)
+      board.add_mark(mark: "x", position: 1)
+
+      expect(board.extract_player_positions(sign: "x")).to eq([0, 1])
+    end
+
+    it "doesn't add positions for the other sign" do
+      board.add_mark(mark: "x", position: 0)
+      board.add_mark(mark: "o", position: 4)
+      board.add_mark(mark: "o", position: 3)
+
+      expect(board.extract_player_positions(sign: "x")).to eq([0])
+      expect(board.extract_player_positions(sign: "x").length).to eq(1)
+    end
+  end
+
+  describe "#full?" do
+    it "returns true if the board is full" do
+      (0..8).each { |n| board.add_mark(mark: "x", position: n) }
+
+      expect(board.full?).to eq(true)
+    end
+
+    it "returns false if there are empty positions on the board" do
+      expect(board.full?).to eq(false)
+    end
+  end
 end
