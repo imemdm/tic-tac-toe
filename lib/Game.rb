@@ -24,9 +24,9 @@ class Game
   # Runs the entire game
   def run
     rounds.times do
-      round = Round.new(first, second)
+      round = Round.new(players)
       round.play
-      flip_players
+      players.reverse!
     end
     settle
   end
@@ -34,16 +34,6 @@ class Game
   private
 
   attr_accessor :player1, :player2, :rounds
-
-  def flip_players
-    if first.equal?(player1)
-      self.first = player2
-      self.second = player1
-    else
-      self.first = player1
-      self.second = player2
-    end
-  end
 
   # Compares the scores of both players
   def settle
