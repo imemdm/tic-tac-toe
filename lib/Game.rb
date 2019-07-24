@@ -9,7 +9,7 @@ class Game
     print "How many round do you wanna play: "
     rounds = gets.chomp
 
-    puts "Game is about to start. Mark a tile by choosing a number between 1 and 9."
+    puts "Game is about to start. Mark a tile by choosing a number between 1 and 9. Rounds to be played: #{rounds}"
 
     Game.new(player1, player2, rounds).run
   end
@@ -23,14 +23,12 @@ class Game
 
   # Runs the entire game
   def run
-    welcome_screen
     rounds.times do
       round = Round.new(first, second)
       round.play
       flip_players
     end
     settle
-    ending_screen
   end
 
   private
@@ -50,7 +48,7 @@ class Game
   # Compares the scores of both players
   def settle
     puts "DRAW" if player1.score == player2.score
-    winner = [player1, player2].sort_by { |player| player.score }.last
+    winner = players.sort_by { |player| player.score }.last
     show_winner(winner)
   end
 
