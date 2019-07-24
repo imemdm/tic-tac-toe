@@ -47,28 +47,15 @@ class Game
     end
   end
 
-  # Settles the game by comparing players' scores
+  # Compares the scores of both players
   def settle
-    if player1.score > player2.score
-      self.game_winner = player1
-    elsif player2.score > player1.score
-      self.game_winner = player2
-    else
-      self.game_winner = nil
-    end
+    puts "DRAW" if player1.score == player2.score
+    winner = [player1, player2].sort_by { |player| player.score }.last
+    show_winner(winner)
   end
 
-  # Prints a welcome screen indicating the game begins
-  def welcome_screen
-    puts "#{rounds} rounds will be played."
-  end
-
-  # Ends the game by displaying the final result
-  def ending_screen
-    if game_winner.nil?
-      puts "DRAW!"
-    else
-      puts "#{game_winner.name} has won the game by winning #{game_winner.score} out of #{@rounds}"
-    end
+  # Displays the details of the winning player
+  def show_winner(game_winner)
+    puts "#{game_winner.name} has won the game by winning #{game_winner.score} out of #{rounds}"
   end
 end
