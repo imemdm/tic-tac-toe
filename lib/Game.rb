@@ -1,17 +1,30 @@
 class Game
+  def self.start
+    print "Please select a name for Player 1: "
+    player1 = gets.chomp
+
+    print "Please select a name for Player 2: "
+    player2 = gets.chomp
+
+    print "How many round do you wanna play: "
+    rounds = gets.chomp
+
+    puts "Game is about to start. Mark a tile by choosing a number between 1 and 9."
+
+    Game.new(player1, player2, rounds).run
+  end
+
   def initialize(p1_name, p2_name, rounds)
     @player1 = Player.new(p1_name, "x")
     @player2 = Player.new(p2_name, "o")
     @rounds = rounds.to_i
-    @game_winner = nil
-    @first = @player1
-    @second = @player2
+    @players = [player1, player2]
   end
 
   # Runs the entire game
-  def start
+  def run
     welcome_screen
-    @rounds.times do
+    rounds.times do
       round = Round.new(first, second)
       round.play
       flip_players
@@ -22,7 +35,7 @@ class Game
 
   private
 
-  attr_accessor :player1, :player2, :rounds, :game_winner, :first, :second 
+  attr_accessor :player1, :player2, :rounds
 
   def flip_players
     if first.equal?(player1)
