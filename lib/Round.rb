@@ -1,8 +1,6 @@
 class Round
-  def initialize(p1, p2)
-    @p1 = p1
-    @p2 = p2
-    @active_player = p1
+  def initialize(players)
+    @players = players
     @board = Board.new
   end
   
@@ -10,7 +8,7 @@ class Round
   # by asking each player successively for 
   # input, with a stop condition if there is a winner
   def play
-    loop do
+    loop do 
       board.draw
       turn(by: active_player)
 
