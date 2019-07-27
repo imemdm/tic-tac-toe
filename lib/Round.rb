@@ -1,6 +1,6 @@
 class Round
   def initialize(players)
-    @players = players
+    @players = players.dup
     @board = Board.new
   end
   
@@ -10,7 +10,7 @@ class Round
   def play
     loop do 
       board.draw
-      turn(by: active_player)
+      turn(by: players.first)
 
       if active_player.won?(
         positions: board.extract_player_positions(sign: active_player.sign),
@@ -28,14 +28,13 @@ class Round
         break
       end
 
-      switch_active_player
+      players.reverse!
     end
   end
 
   private
 
-  attr_accessor :active_player
-  attr_reader :p1, :p2, :board
+  attr_accessor :players
 
   def turn(by:)
     pos = nil
@@ -46,12 +45,6 @@ class Round
     board.add_mark(mark: by.sign, position: pos)
   end
 
-  def switch_active_player
-    if active_player.equal?(p1)
-      self.active_player = p2
-    else
-      self.active_player = p1
-    end
   end
 
   # Shows who won the particular round in the console 
