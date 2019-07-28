@@ -54,6 +54,6 @@ class Round
 
   # Shows who won the particular round in the console 
   def show_winner(player)
-    puts "#{player.name} has won the round."
+    puts "#{player.name}(#{player.sign}) has won the round."
   end
 end

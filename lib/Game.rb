@@ -44,6 +44,6 @@ class Game
 
   # Displays the details of the winning player
   def show_winner(game_winner)
-    puts "#{game_winner.name} has won the game by winning #{game_winner.score} out of #{rounds}"
+    puts "#{game_winner.name}(#{game_winner.sign}) has won the game by winning #{game_winner.score} out of #{rounds} rounds."
   end
 end
