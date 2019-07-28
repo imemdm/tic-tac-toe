@@ -34,7 +34,5 @@ class Player
     Integer(str) != nil rescue false
   end
 
-  def ask_for_input
-    print "#{self.name}, mark a position on the board (0-8): "
-  end
+
 end
