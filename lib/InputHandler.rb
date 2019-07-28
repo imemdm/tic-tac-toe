@@ -1,9 +1,9 @@
 class InputHandler
   def self.get(from:)
     input = nil
-    until convert_input(input)
+    until input
       ask(player: from)
-      input = gets.chomp
+      input = convert_input(gets.chomp)
     end
     input
   end
