@@ -18,7 +18,7 @@ class Game
     @player1 = Player.new(p1_name, "x")
     @player2 = Player.new(p2_name, "o")
     @rounds = rounds.to_i
-    @players = [player1, player2]
+    @players = [@player1, @player2]
   end
 
   # Runs the entire game
@@ -33,11 +33,11 @@ class Game
 
   private
 
-  attr_accessor :player1, :player2, :rounds
+  attr_accessor :players, :rounds
 
   # Compares the scores of both players
   def settle
-    puts "DRAW" if player1.score == player2.score
+    puts "DRAW" if players.first.score == players.last.score
     winner = players.sort_by { |player| player.score }.last
     show_winner(winner)
   end
