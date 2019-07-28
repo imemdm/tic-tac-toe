@@ -26,7 +26,7 @@ class Board
   end
 
   def marks_by_player
-    ['x', 'o'].map do |sign|
+    ["x", "o"].map do |sign|
       grid.each_with_index
         .select { |mark, pos| mark == sign }
         .map { |p_mark, pos| pos }
@@ -38,13 +38,12 @@ class Board
   end
 
   def won?
-    outcome = false
     marks_by_player.each do |marks|
       marks.sort!.combination(3).to_a.each do |combo|
-        outcome = WIN_COMBOS.include?(combo)
+        return true if WIN_COMBOS.include?(combo)
       end
     end
-    outcome
+    false
   end
 
   def draw

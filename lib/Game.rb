@@ -37,7 +37,7 @@ class Game
 
   # Compares the scores of both players
   def settle
-    puts "DRAW" if players.first.score == players.last.score
+    puts "Game is a DRAW" if players.first.score == players.last.score
     winner = players.sort_by { |player| player.score }.last
     show_winner(winner)
   end
