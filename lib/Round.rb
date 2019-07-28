@@ -8,20 +8,10 @@ class Round
   # by asking each player successively for 
   # input, with a stop condition if there is a winner
   def play
-    until game_over? 
-      board.draw
+    board.draw
+    until game_over?
       turn(player: players.first)
-
-      if active_player.won?(
-        positions: board.extract_player_positions(sign: active_player.sign),
-        conditions: board.win_conditions
-      )
-        board.draw
-        print_winner(active_player)
-        active_player.increase_score
-        break
-      end
-
+      board.draw
       players.reverse!
     end
     complete
@@ -49,12 +39,17 @@ class Round
       pos = player.get_input
       break if board.valid_position?(position: pos)
     end
-    board.add_mark(mark: by.sign, position: pos)
+    board.add_mark(mark: player.sign, position: pos)
   end
 
+  # Runs only after the completion of each round
   def complete
-    puts "No winner. Board is full." if full?
-    show_winner(players.last) if won?
+    if won?
+      players.last.increase_score
+      show_winner(players.last)
+    else
+      puts "No winner. Board is full."
+    end
   end
 
   # Shows who won the particular round in the console 

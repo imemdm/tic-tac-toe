@@ -23,14 +23,6 @@ class Player
     end
   end
 
-  def won?(positions:, conditions:)
-    outcome = false
-    positions.sort!.combination(3).to_a.each do |combo|
-      outcome = conditions.include?(combo)
-    end
-    outcome
-  end
-
   def increase_score
     self.score += 1
   end

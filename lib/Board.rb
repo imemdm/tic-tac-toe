@@ -1,8 +1,8 @@
 class Board
-  attr_reader :marks
+  attr_reader :grid
 
   # All possible winning combinations of board positions
-  @@win_combos = [
+  WIN_COMBOS = [
     [0, 3, 6],
     [1, 4, 7],
     [2, 5, 8],
@@ -13,30 +13,38 @@ class Board
     [2, 4, 6]
   ]
 
-  def initialize
-    @marks = Array.new(9)
+  def initialize()
+    @grid = Array.new(9)
   end
 
   def add_mark(mark:, position:)
-    marks[position] = mark
+    grid[position] = mark
   end
 
   def valid_position?(position:)
-    marks[position].nil? && position >= 0 && position <= 8
+    grid[position].nil? && position >= 0 && position <= 8
   end
 
-  def win_conditions
-    @@win_combos
-  end
-
-  def extract_player_positions(sign:)
-    marks.each_with_index
-          .select { |mark, pos| mark == sign }
-          .map { |p_mark, pos| pos }
+  def marks_by_player
+    ['x', 'o'].map do |sign|
+      grid.each_with_index
+        .select { |mark, pos| mark == sign }
+        .map { |p_mark, pos| pos }
+    end
   end
 
   def full?
-    !marks.include?(nil)
+    !grid.include?(nil)
+  end
+
+  def won?
+    outcome = false
+    marks_by_player.each do |marks|
+      marks.sort!.combination(3).to_a.each do |combo|
+        outcome = WIN_COMBOS.include?(combo)
+      end
+    end
+    outcome
   end
 
   def draw
@@ -45,7 +53,7 @@ class Board
     5.times do |row|
       5.times do |col|
         if row % 2 == 0 && col % 2 == 0
-          print marks[pos].nil? ? " " : marks[pos]
+          print grid[pos].nil? ? " " : grid[pos]
           pos += 1
         elsif row % 2 == 0 && col % 2 != 0
           print "|"
