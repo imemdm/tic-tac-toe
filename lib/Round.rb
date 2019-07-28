@@ -19,7 +19,7 @@ class Round
 
   private
 
-  attr_accessor :players
+  attr_accessor :players, :board
 
   def game_over?
     full? || won?
