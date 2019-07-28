@@ -21,6 +21,6 @@ class InputHandler
   end
 
   def self.ask(player: )
-    print "#{player.name}, mark a position on the board (1-9): "
+    print "#{player.name} (#{player.sign}), mark a position on the board (1-9): "
   end
 end
