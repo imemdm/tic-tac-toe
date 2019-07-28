@@ -36,7 +36,7 @@ class Round
   def turn(player:)
     pos = nil
     loop do
-      pos = player.get_input
+      pos = InputHandler.get(from: player)
       break if board.valid_position?(position: pos)
     end
     board.add_mark(mark: player.sign, position: pos)

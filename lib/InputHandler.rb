@@ -12,7 +12,7 @@ class InputHandler
 
   # Returns an integer if input is numeric, nil otherwise
   def convert_input(input)
-    input.to_i if numeric?(input)
+    input.to_i - 1 if numeric?(input)
   end
 
   # A helper that checks if a given string represents an integer
@@ -21,6 +21,6 @@ class InputHandler
   end
 
   def ask(player: )
-    print "#{player.name}, mark a position on the board (0-8): "
+    print "#{player.name}, mark a position on the board (1-9): "
   end
 end
